@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f5f6fb">
+    <meta name="theme-color" content="#f5f6fb" id="theme-color">
     <title>오늘의 룰렛</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
@@ -11,6 +11,10 @@
   <body>
     <main class="app">
       <header class="page-header">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="다크 모드로 전환">
+          <span class="theme-icon" id="theme-icon" aria-hidden="true">☾</span>
+          <span id="theme-label">다크 모드</span>
+        </button>
         <p class="eyebrow">LUCKY SPIN</p>
         <h1>오늘의 룰렛</h1>
         <p class="subtitle">고민되는 순간, 룰렛에게 맡겨 보세요.</p>

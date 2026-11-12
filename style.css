@@ -27,10 +27,30 @@ button, input { font: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
 
 .app { width: min(100%, 1030px); margin: 0 auto; }
-.page-header { margin-bottom: 32px; text-align: center; }
+.page-header { position: relative; margin-bottom: 32px; text-align: center; }
 .eyebrow { margin: 0 0 8px; color: #8589a2; font-size: 11px; font-weight: 800; letter-spacing: .2em; }
 h1 { margin: 0; color: #24283b; font-size: clamp(32px, 6vw, 44px); font-weight: 800; letter-spacing: -.06em; }
 .subtitle { margin: 9px 0 0; color: #8589a2; font-size: 15px; }
+.theme-toggle {
+  position: absolute;
+  top: 4px;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border: 1px solid #e6e7ef;
+  border-radius: 999px;
+  background: #fff;
+  color: #555a70;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.theme-toggle:hover { border-color: #c9c4e7; background: #f8f7ff; }
+.theme-toggle:focus-visible { outline: 3px solid #8874ec; outline-offset: 3px; }
+.theme-icon { color: #7565cc; font-size: 16px; line-height: 1; }
 
 .game-layout {
   display: grid;
@@ -183,9 +203,79 @@ h2 { margin: 0; font-size: 23px; font-weight: 800; letter-spacing: -.04em; }
 footer { margin-top: 25px; color: #a1a3b2; font-size: 12px; text-align: center; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  color: #e8e9f2;
+  background: #171927;
+}
+
+:root[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 8% 12%, #30294b 0, transparent 26rem),
+    radial-gradient(circle at 95% 85%, #442b3c 0, transparent 27rem),
+    #171927;
+}
+
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2 { color: #f0f0f7; }
+:root[data-theme="dark"] .eyebrow { color: #a2a4bb; }
+:root[data-theme="dark"] .subtitle,
+:root[data-theme="dark"] .wheel-hint,
+:root[data-theme="dark"] .list-caption,
+:root[data-theme="dark"] footer { color: #a2a4bb; }
+:root[data-theme="dark"] .wheel-panel,
+:root[data-theme="dark"] .options-panel {
+  border-color: #34374d;
+  background: #222537;
+  box-shadow: 0 16px 50px #00000025;
+}
+:root[data-theme="dark"] .wheel {
+  border-color: #303348;
+  box-shadow: 0 0 0 1px #41445a, 0 10px 24px #00000035, inset 0 0 0 1px #ffffff20;
+}
+:root[data-theme="dark"] .wheel::after { border-color: #ffffff25; }
+:root[data-theme="dark"] .pointer {
+  border-top-color: #f1c75b;
+  filter: drop-shadow(0 3px 3px #00000066);
+}
+:root[data-theme="dark"] .spin-button {
+  border-color: #222537;
+  background: #7565cc;
+}
+:root[data-theme="dark"] .spin-button small { color: #e2defb; }
+:root[data-theme="dark"] .result {
+  border-color: #403b5d;
+  background: #2b2940;
+}
+:root[data-theme="dark"] .result-label { color: #b0aacd; }
+:root[data-theme="dark"] .result-value { color: #c7baff; }
+:root[data-theme="dark"] .item-count { background: #39344f; color: #c7baff; }
+:root[data-theme="dark"] .add-form input {
+  border-color: #41445a;
+  background: #1c1f30;
+  color: #f0f0f7;
+}
+:root[data-theme="dark"] .add-form input::placeholder { color: #8589a2; }
+:root[data-theme="dark"] .item-row {
+  border-color: #3a3d52;
+  background: #282b3e;
+}
+:root[data-theme="dark"] .item-name { color: #e0e1ec; }
+:root[data-theme="dark"] .delete-button { color: #a2a4bb; }
+:root[data-theme="dark"] .delete-button:hover { background: #49313a; color: #ff9a94; }
+:root[data-theme="dark"] .empty-state { color: #a2a4bb; }
+:root[data-theme="dark"] .theme-toggle {
+  border-color: #41445a;
+  background: #222537;
+  color: #e0e1ec;
+}
+:root[data-theme="dark"] .theme-toggle:hover { border-color: #70669d; background: #2b2e43; }
+:root[data-theme="dark"] .theme-icon { color: #f1c75b; }
+
 @media (max-width: 760px) {
   body { padding: 30px 16px; }
   .page-header { margin-bottom: 24px; }
+  .theme-toggle { position: static; display: flex; width: fit-content; margin: 0 auto 15px; }
   .game-layout { grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 500px; margin: 0 auto; }
   .wheel-panel { padding: 25px 20px 20px; }
   .wheel-wrap { width: min(100%, 380px); }

@@ -9,15 +9,50 @@ const itemList = document.querySelector("#item-list");
 const itemCount = document.querySelector("#item-count");
 const emptyState = document.querySelector("#empty-state");
 const addButton = addForm.querySelector("button");
+const themeToggle = document.querySelector("#theme-toggle");
+const themeIcon = document.querySelector("#theme-icon");
+const themeLabel = document.querySelector("#theme-label");
+const themeColor = document.querySelector("#theme-color");
 
 const colors = ["#7765d1", "#f28a78", "#39a99a", "#f1b94e", "#5591d1", "#d56e9c", "#85af62", "#e78649"];
 const items = ["치킨", "피자", "초밥", "떡볶이"];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const THEME_STORAGE_KEY = "roulette-theme";
 
 let isSpinning = false;
 let currentRotation = 0;
 let finishTimer = null;
 let selectedItem = "";
+
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+  document.documentElement.dataset.theme = theme;
+  themeToggle.setAttribute("aria-label", isDark ? "화이트 모드로 전환" : "다크 모드로 전환");
+  themeToggle.setAttribute("aria-pressed", String(isDark));
+  themeIcon.textContent = isDark ? "☀" : "☾";
+  themeLabel.textContent = isDark ? "화이트 모드" : "다크 모드";
+  themeColor.content = isDark ? "#171927" : "#f5f6fb";
+}
+
+function loadTheme() {
+  try {
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    return savedTheme === "dark" ? "dark" : "light";
+  } catch (error) {
+    console.error("테마 설정을 불러오지 못했습니다.", error);
+    return "light";
+  }
+}
+
+function toggleTheme() {
+  const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(nextTheme);
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+  } catch (error) {
+    console.error("테마 설정을 저장하지 못했습니다.", error);
+  }
+}
 
 function render() {
   const count = items.length;
@@ -148,6 +183,7 @@ addForm.addEventListener("submit", (event) => {
 });
 
 spinButton.addEventListener("click", spin);
+themeToggle.addEventListener("click", toggleTheme);
 wheel.addEventListener("transitionend", (event) => {
   if (event.propertyName === "transform") finishSpin();
 });
@@ -156,4 +192,5 @@ reducedMotion.addEventListener?.("change", () => {
   if (!isSpinning) wheel.style.transitionDuration = "";
 });
 
+applyTheme(loadTheme());
 render();
