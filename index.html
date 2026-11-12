@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f6fb">
+    <title>오늘의 룰렛</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="page-header">
+        <p class="eyebrow">LUCKY SPIN</p>
+        <h1>오늘의 룰렛</h1>
+        <p class="subtitle">고민되는 순간, 룰렛에게 맡겨 보세요.</p>
+      </header>
+
+      <div class="game-layout">
+        <section class="wheel-panel" aria-label="룰렛 게임">
+          <div class="wheel-wrap">
+            <span class="pointer" aria-hidden="true"></span>
+            <div class="wheel" id="wheel" role="group" aria-label="항목을 추가해 룰렛을 만들어 보세요">
+              <div class="wheel-labels" id="wheel-labels" aria-hidden="true"></div>
+              <button class="spin-button" id="spin-button" type="button" disabled>
+                <span>돌리기</span>
+                <small>SPIN</small>
+              </button>
+            </div>
+          </div>
+          <p class="wheel-hint" id="wheel-hint">항목을 2개 이상 추가하면 돌릴 수 있어요.</p>
+          <section class="result" aria-live="polite" aria-atomic="true">
+            <p class="result-label">오늘의 선택</p>
+            <p class="result-value" id="result">룰렛을 돌려 보세요!</p>
+          </section>
+        </section>
+
+        <section class="options-panel" aria-labelledby="options-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">YOUR OPTIONS</p>
+              <h2 id="options-title">항목 설정</h2>
+            </div>
+            <span class="item-count" id="item-count">0개</span>
+          </div>
+
+          <form class="add-form" id="add-form">
+            <label class="sr-only" for="item-input">추가할 항목</label>
+            <input id="item-input" name="item" type="text" maxlength="24" placeholder="예: 점심 메뉴" autocomplete="off" required>
+            <button type="submit" class="add-button" aria-label="항목 추가">추가</button>
+          </form>
+
+          <p class="list-caption">항목을 추가하거나 삭제할 수 있어요.</p>
+          <ul class="item-list" id="item-list" aria-label="룰렛 항목"></ul>
+          <p class="empty-state" id="empty-state">아직 항목이 없어요.<br>첫 번째 선택지를 추가해 보세요.</p>
+        </section>
+      </div>
+      <footer>선택은 룰렛에 맡기고, 즐거운 하루를 시작해요 ✨</footer>
+    </main>
+  </body>
+</html>
